@@ -17,6 +17,7 @@ function main() {
       reposList.appendChild(li);
     });
   });
+  getNumber("namli");
 }
 /**
  * Get list of user repository Name
@@ -33,5 +34,16 @@ function getListofRepo(user = "namli") {
       return data.map(item => {
         return item.name;
       });
+    });
+}
+
+// Number of public_repos
+
+function getNumber(user = "namli") {
+  fetch(`https://api.github.com/users/${user}`)
+    .then(res => res.json())
+    .then(data => {
+      const spanTag = document.getElementById("repos-count");
+      spanTag.innerHTML = data.public_repos;
     });
 }
